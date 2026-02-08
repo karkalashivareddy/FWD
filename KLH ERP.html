@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme6">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/smalllogo.svg" type="image/svg+xml">
+  <title>XL University ERP</title>
+
+  <!-- Hide page until fully loaded -->
+  <style>
+    html { visibility: hidden; }
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      font-size: 20px;
+      z-index: 9999;
+    }
+    .login-box {
+      margin: 50px auto;
+      padding: 20px;
+      max-width: 400px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .settings-panel {
+      position: fixed;
+      right: -300px;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      transition: right 0.3s ease;
+      z-index: 10000;
+    }
+    .settings-panel.active {
+      right: 0;
+    }
+    #settings-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 9999;
+    }
+    .color {
+      display: inline-block;
+      width: 30px; height: 30px;
+      margin: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+
+  <!-- Apply saved theme -->
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'blue';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body id="mobile_bg" data-theme="theme6">
+
+  <!-- Loader -->
+  <div id="loader">Loading...</div>
+
+  <!-- Page Layout -->
+  <div class="login-box">
+    <h2>Welcome to XL University ERP</h2>
+    <p>Login form goes here…</p>
+    <button id="settings-toggle">⚙️ Settings</button>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settings-overlay"></div>
+  <div id="settings-panel" class="settings-panel">
+    <button class="settings-close">✖ Close</button>
+    <h3>Choose Theme</h3>
+    <label><input type="radio" name="theme" value="blue"> Blue</label>
+    <label><input type="radio" name="theme" value="dark"> Dark</label>
+    <label><input type="radio" name="theme" value="light"> Light</label>
+
+    <h3>Pick Color</h3>
+    <div class="color" data-color="#3498db" style="background:#3498db;"></div>
+    <div class="color" data-color="#2ecc71" style="background:#2ecc71;"></div>
+    <div class="color" data-color="#e74c3c" style="background:#e74c3c;"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Show page after load
+    window.addEventListener('load', function () {
+      document.documentElement.style.visibility = 'visible';
+      document.getElementById('loader').style.display = 'none';
+    });
+
+    // Theme selection
+    const themeRadios = document.querySelectorAll('input[name="theme"]');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      document.body.dataset.theme = savedTheme;
+      const radio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    themeRadios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        document.body.dataset.theme = this.value;
+        localStorage.setItem('theme', this.value);
+      });
+    });
+
+    // Settings panel toggle
+    const toggleBtn = document.getElementById('settings-toggle');
+    const panel = document.getElementById('settings-panel');
+    const overlay = document.getElementById('settings-overlay');
+    const colors = document.querySelectorAll('.color');
+
+    function openPanel() {
+      panel.classList.add('active');
+      overlay.style.display = 'block';
+    }
+
+    function closePanel() {
+      panel.classList.remove('active');
+      overlay.style.display = 'none';
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', openPanel);
+    if (overlay) overlay.addEventListener('click', closePanel);
+
+    // Apply saved theme color
+    const savedColor = localStorage.getItem('themeColor');
+    if (savedColor) {
+      document.documentElement.style.setProperty('--theme-color', savedColor);
+    }
+
+    // Change theme color
+    colors.forEach(color => {
+      color.addEventListener('click', function () {
+        const selectedColor = this.getAttribute('data-color');
+        document.documentElement.style.setProperty('--theme-color', selectedColor);
+        localStorage.setItem('themeColor', selectedColor);
+      });
+    });
+
+    // Close button inside settings panel
+    const closeBtn = document.querySelector('.settings-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        closePanel();
+      });
+    }
+  </script>
+
+  <!-- Hidden detection span -->
+  <span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
+</body>
+</html>

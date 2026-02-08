@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <div class="left-section">
+      <img src="klhLog.png" alt="KLH Logo" class="main-logo">
+    </div>
+  <div class="card">
+    <!-- Background shapes -->
+    <div class="card-bg card-bg-1"></div>
+    <div class="card-bg card-bg-2"></div>
+
+    <!-- Logo -->
+    <!-- Login Form -->
+    <div class="form signin active">
+      <form>
+        <h2 id="h2">Student Login</h2>
+        <input type="text" placeholder="Student ID" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p><a href="#">Forgot Password?</a></p>
+        <em onclick="toggleView()">Mentor Login</em>
+      </form>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="form signup">
+  <form>
+    <h2 >Mentor Login</h2>
+    <input type="text" placeholder="Mentor ID" required>
+    <input type="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+    <p><a href="#">Forgot Password?</a></p>
+<em onclick="toggleView()">Student Login</em>
+  </form>
+</div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
