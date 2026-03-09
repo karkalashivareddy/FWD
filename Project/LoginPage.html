@@ -1,44 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Student Login</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Digital Gate Pass System</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-      <div class="left-section">
-      <img src="klhLog.png" alt="KLH Logo" class="main-logo">
-    </div>
-  <div class="card">
-    <!-- Background shapes -->
-    <div class="card-bg card-bg-1"></div>
-    <div class="card-bg card-bg-2"></div>
 
-    <!-- Logo -->
-    <!-- Login Form -->
-    <div class="form signin active">
-      <form>
-        <h2 id="h2">Student Login</h2>
-        <input type="text" placeholder="Student ID" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-        <p><a href="#">Forgot Password?</a></p>
-        <em onclick="toggleView()">Mentor Login</em>
-      </form>
-    </div>
+<!-- LOGIN PAGE -->
 
-    <!-- Signup Form -->
-    <div class="form signup">
-  <form>
-    <h2 >Mentor Login</h2>
-    <input type="text" placeholder="Mentor ID" required>
-    <input type="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-    <p><a href="#">Forgot Password?</a></p>
-<em onclick="toggleView()">Student Login</em>
-  </form>
+<div id="login" class="container">
+
+<img src="klhLog.png" class="logo">
+
+<h2>Student Gate Pass Login</h2>
+
+<input type="text" id="loginId" placeholder="Enter ID">
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<button onclick="login()">Login</button>
+
+<p id="error" class="error">Invalid Login</p>
+
 </div>
-  </div>
-  <script src="script.js"></script>
+
+
+<!-- STUDENT DASHBOARD -->
+
+<div id="studentDash" class="dashboard">
+
+<div class="header">
+<img src="klhLog.png">
+<h2>Student Dashboard</h2>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+
+<h3>Apply Gate Pass</h3>
+
+<input type="date" id="date">
+<input type="time" id="time">
+<input type="text" id="reason" placeholder="Reason for leaving">
+
+<button onclick="applyPass()">Submit Request</button>
+
+</div>
+
+<div class="card">
+
+<h3>My Gate Pass History</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Reason</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="studentTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- MENTOR DASHBOARD -->
+
+<div id="mentorDash" class="dashboard">
+
+<div class="header">
+<img src="klhLog.png">
+<h2>Mentor Dashboard</h2>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+
+<h3>Student Requests</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Student</th>
+<th>Date</th>
+<th>Time</th>
+<th>Reason</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="mentorTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
