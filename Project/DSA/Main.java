@@ -1,5 +1,5 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 /* USER CLASS */
 class User {
@@ -16,8 +16,9 @@ class User {
     }
 }
 
-/* GATE PASS REQUEST CLASS */
+/* GATE PASS CLASS */
 class GatePass {
+
     int requestId;
     String studentId;
     String date;
@@ -36,6 +37,7 @@ class GatePass {
 }
 
 /* MAIN SYSTEM */
+
 public class Main {
 
     static HashMap<String, User> users = new HashMap<>();
@@ -45,14 +47,11 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     static int requestCounter = 1;
-
     static User currentUser = null;
 
-    static final String FILE_NAME = "requests.txt";
+    static final String FILE_NAME = "C:/FWD/requests.txt";
 
     public static void main(String[] args) {
-
-        /* DEFAULT USERS */
 
         users.put("2520030105",
                 new User("2520030105", "shiva@27", "student", "Karkala Shiva Reddy"));
@@ -60,9 +59,30 @@ public class Main {
         users.put("2007",
                 new User("2007", "123", "mentor", "Dr Srinivas"));
 
+        createFileIfNotExists();
         loadRequests();
 
         loginMenu();
+    }
+
+    /* CREATE FILE */
+
+    static void createFileIfNotExists() {
+
+        try {
+
+            File file = new File(FILE_NAME);
+
+            if (!file.exists()) {
+
+                file.createNewFile();
+                System.out.println("requests.txt created in C:\\FWD");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /* LOAD REQUESTS FROM FILE */
@@ -73,14 +93,12 @@ public class Main {
 
             File file = new File(FILE_NAME);
 
-            if (!file.exists())
-                file.createNewFile();
+            Scanner reader = new Scanner(file);
 
-            Scanner fileReader = new Scanner(file);
+            while (reader.hasNextLine()) {
 
-            while (fileReader.hasNextLine()) {
+                String line = reader.nextLine();
 
-                String line = fileReader.nextLine();
                 String[] data = line.split(",");
 
                 int id = Integer.parseInt(data[0]);
@@ -90,30 +108,30 @@ public class Main {
                 String reason = data[4];
                 String status = data[5];
 
-                GatePass req = new GatePass(id, studentId, date, time, reason, status);
+                GatePass gp = new GatePass(id, studentId, date, time, reason, status);
 
-                allRequests.add(req);
+                allRequests.add(gp);
 
                 if (status.equals("Pending"))
-                    pendingQueue.add(req);
+                    pendingQueue.add(gp);
 
                 requestCounter = Math.max(requestCounter, id + 1);
             }
 
-            fileReader.close();
+            reader.close();
 
         } catch (Exception e) {
-            System.out.println("Error loading file");
+            System.out.println("File empty or error loading");
         }
     }
 
-    /* SAVE REQUESTS TO FILE */
+    /* SAVE REQUESTS */
 
     static void saveRequests() {
 
         try {
 
-            PrintWriter writer = new PrintWriter(FILE_NAME);
+            PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME));
 
             for (GatePass r : allRequests) {
 
@@ -130,15 +148,15 @@ public class Main {
             writer.close();
 
         } catch (Exception e) {
-            System.out.println("Error saving file");
+            e.printStackTrace();
         }
     }
 
-    /* LOGIN */
+    /* LOGIN MENU */
 
     static void loginMenu() {
 
-        System.out.println("===== Student Gate Pass Login =====");
+        System.out.println("\n===== Student Gate Pass Login =====");
 
         System.out.print("Enter ID: ");
         String id = sc.next();
@@ -228,9 +246,9 @@ public class Main {
 
     static void viewStudentRequests() {
 
-        System.out.println("\nYour Requests:");
-
         boolean found = false;
+
+        System.out.println("\nYour Requests:");
 
         for (GatePass r : allRequests) {
 
@@ -239,14 +257,16 @@ public class Main {
                 found = true;
 
                 System.out.println(
-                        r.date + " " + r.time + " | " +
-                        r.reason + " | " + r.status
+                        "ID: " + r.requestId +
+                        " | " + r.date + " " + r.time +
+                        " | " + r.reason +
+                        " | " + r.status
                 );
             }
         }
 
         if (!found)
-            System.out.println("No requests");
+            System.out.println("No requests found");
     }
 
     /* MENTOR DASHBOARD */
@@ -256,7 +276,7 @@ public class Main {
         while (true) {
 
             System.out.println("\n===== Mentor Dashboard =====");
-            System.out.println("1. View Pending Requests");
+            System.out.println("1. Process Request");
             System.out.println("2. Logout");
 
             int choice = sc.nextInt();
@@ -273,7 +293,7 @@ public class Main {
         }
     }
 
-    /* PROCESS REQUESTS */
+    /* PROCESS REQUEST */
 
     static void processRequests() {
 
