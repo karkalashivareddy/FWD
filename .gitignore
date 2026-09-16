@@ -1,0 +1,12 @@
+.vscode/
+.idea/
+*.class
+target/
+build/
+dist/
+node_modules/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+!.env.example

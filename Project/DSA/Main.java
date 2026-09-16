@@ -76,7 +76,7 @@ public class Main {
             if (!file.exists()) {
 
                 file.createNewFile();
-                System.out.println("requests.txt created in C:\\FWD");
+            System.out.println("requests.txt created in the current directory");
 
             }
 
