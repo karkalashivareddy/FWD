@@ -1,3 +1,12 @@
+function esc(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const DB={
 users:[
 {id:'2520030105',password:'student-demo-password',role:'student',name:'Karkala Shiva Reddy'},
@@ -81,10 +90,10 @@ my.forEach(r=>{
 table.innerHTML+=`
 
 <tr>
-<td>${r.date}</td>
-<td>${r.time}</td>
-<td>${r.reason}</td>
-<td><span class="badge ${r.status.toLowerCase()}">${r.status}</span></td>
+<td>${esc(r.date)}</td>
+<td>${esc(r.time)}</td>
+<td>${esc(r.reason)}</td>
+<td><span class="badge ${esc(r.status.toLowerCase())}">${esc(r.status)}</span></td>
 </tr>
 
 `;
@@ -154,22 +163,22 @@ table.innerHTML+=`
 
 <tr>
 
-<td>${name}</td>
-<td>${r.date}</td>
-<td>${r.time}</td>
-<td>${r.reason}</td>
+<td>${esc(name)}</td>
+<td>${esc(r.date)}</td>
+<td>${esc(r.time)}</td>
+<td>${esc(r.reason)}</td>
 
 <td>
 
 ${r.status==="Pending" ? `
 
-<button class="action" onclick="update(${r.id},'Approved')" style="background:green;color:white;">Approve</button>
+<button class="action" onclick="update(${esc(r.id)},'Approved')" style="background:green;color:white;">Approve</button>
 
-<button class="action" onclick="update(${r.id},'Rejected')" style="background:red;color:white;">Reject</button>
+<button class="action" onclick="update(${esc(r.id)},'Rejected')" style="background:red;color:white;">Reject</button>
 
 ` :
 
-`<span class="badge ${r.status.toLowerCase()}">${r.status}</span>`}
+`<span class="badge ${esc(r.status.toLowerCase())}">${esc(r.status)}</span>`}
 
 </td>
 
