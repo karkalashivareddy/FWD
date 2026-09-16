@@ -49,15 +49,15 @@ public class Main {
     static int requestCounter = 1;
     static User currentUser = null;
 
-    static final String FILE_NAME = "C:/FWD/requests.txt";
+    static final String FILE_NAME = "requests.txt";
 
     public static void main(String[] args) {
 
         users.put("2520030105",
-                new User("2520030105", "shiva@27", "student", "Karkala Shiva Reddy"));
+                new User("2520030105", "student-demo-password", "student", "Karkala Shiva Reddy"));
 
         users.put("2007",
-                new User("2007", "123", "mentor", "Dr Srinivas"));
+                new User("2007", "mentor-demo-password", "mentor", "Dr Srinivas"));
 
         createFileIfNotExists();
         loadRequests();

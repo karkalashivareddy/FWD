@@ -1,7 +1,7 @@
 const DB={
 users:[
-{id:'2520030105',password:'shiva@27',role:'student',name:'Karkala Shiva Reddy'},
-{id:'2007',password:'123',role:'mentor',name:'Dr Srinivas'}
+{id:'2520030105',password:'student-demo-password',role:'student',name:'Karkala Shiva Reddy'},
+{id:'2007',password:'mentor-demo-password',role:'mentor',name:'Dr Srinivas'}
 ],
 requests:[]
 };
