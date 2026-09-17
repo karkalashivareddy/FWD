@@ -59,6 +59,16 @@ Project/DSA/           Java console gate-pass implementation
 requests.txt           sample persisted request data
 ```
 
+## Screenshots
+
+| View | Screenshot |
+| --- | --- |
+| Login | ![Login](docs/assets/screenshots/01-login.png) |
+| Student Dashboard | ![Student Dashboard](docs/assets/screenshots/02-student-dashboard.png) |
+| Mentor Dashboard | ![Mentor Dashboard](docs/assets/screenshots/03-mentor-dashboard.png) |
+
+*Screenshots captured from live static application (Python HTTP server on :8093) on 2026-09-17. Demo credentials: student `2520030105` / `student-demo-password`, mentor `2007` / `mentor-demo-password`. Data persists in browser localStorage.*
+
 ## Author
 
 **Karkala Shiva Reddy** — [GitHub](https://github.com/karkalashivareddy)
